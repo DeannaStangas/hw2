@@ -219,6 +219,55 @@ new_role["movie_id"] = dk.id
 new_role["actor_id"] = heath.id
 new_role["character_name"] = "Joker"
 new_role.save
+
+new_role = Role.new
+new_role["movie_id"] = dk.id
+new_role["actor_id"] = aaron.id
+new_role["character_name"] = "Harvey Dent"
+new_role.save
+
+new_role = Role.new
+new_role["movie_id"] = dk.id
+new_role["actor_id"] = michael.id
+new_role["character_name"] = "Alfred"
+new_role.save
+
+new_role = Role.new
+new_role["movie_id"] = dk.id
+new_role["actor_id"] = maggie.id
+new_role["character_name"] = "Rachel Dawes"
+new_role.save
+
+new_role = Role.new
+new_role["movie_id"] = dkr.id
+new_role["actor_id"] = christian.id
+new_role["character_name"] = "Bruce Wayne"
+new_role.save
+
+new_role = Role.new
+new_role["movie_id"] = dkr.id
+new_role["actor_id"] = gary.id
+new_role["character_name"] = "Comissioner Gordon"
+new_role.save
+
+new_role = Role.new
+new_role["movie_id"] = dkr.id
+new_role["actor_id"] = tom.id
+new_role["character_name"] = "Bane"
+new_role.save
+
+new_role = Role.new
+new_role["movie_id"] = dkr.id
+new_role["actor_id"] = joseph.id
+new_role["character_name"] = "John Blake"
+new_role.save
+
+new_role = Role.new
+new_role["movie_id"] = dkr.id
+new_role["actor_id"] = anne.id
+new_role["character_name"] = "Selina Kyle"
+new_role.save
+
 # Prints a header for the movies output
 puts "Movies"
 puts "======"
@@ -226,12 +275,21 @@ puts ""
 
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
-
+movies=Movie.all
+for movie in movies
+    studio = Studio.find_by({"id" => movie["studio_id"]})
+    puts "#{movie["title"]} #{movie["year_released"]} #{movie["MPAA_rating"]} #{studio["name"]}"
+end
 # Prints a header for the cast output
 puts ""
 puts "Top Cast"
 puts "========"
 puts ""
-
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
+roles = Role.all
+for role in roles
+    movie = Movie.find_by({"id"=> role["movie_id"]})
+    actor = Actor.find_by({"id"=> role["actor_id"]})
+    puts "#{movie["title"]} #{actor["name"]} #{role["character_name"]}"
+end
